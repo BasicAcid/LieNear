@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // This is just a Dynamic array.
 struct Vector
@@ -14,12 +15,26 @@ struct Matrix
     size_t cols;
 };
 
-struct Vector create_vector(size_t size)
+struct Vector create_vector(size_t length)
 {
-    struct DynamicArray arr;
-    arr.data = (double *)malloc(size * sizeof(Vector));
-    arr.size = size;
-    return arr;
+    struct Vector vec;
+    vec.elements = (double *)malloc(length * sizeof(vec));
+    vec.length = length;
+    return vec;
+}
+
+void
+print_vector(struct Vector vec)
+{
+    for(size_t i = 0; i < vec.length; i++)
+        printf("%f\n", vec.elements[i]);
+}
+
+void
+free_vector(struct Vector *vec)
+{
+    free(vec->elements);
+    vec->length = 0;
 }
 
 // TODO: Implement create_matrix.

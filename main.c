@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// TODO: add allocation checks.
+
 // This is just a Dynamic array.
 struct Vector
 {
@@ -18,9 +20,25 @@ struct Matrix
 struct Vector create_vector(size_t length)
 {
     struct Vector vec;
-    vec.elements = (double *)malloc(length * sizeof(vec));
+    vec.elements = malloc(length * sizeof(vec));
     vec.length = length;
     return vec;
+}
+
+struct Matrix create_matrix(size_t n_rows, size_t n_cols)
+{
+    struct Matrix matrix;
+    matrix.elements = malloc(n_rows * sizeof(matrix));
+
+    for(size_t i = 0; i < n_rows; ++i)
+    {
+        matrix.elements[i] = malloc(n_cols * sizeof(matrix));
+    }
+
+    matrix.rows = n_rows;
+    matrix.cols = n_cols;
+
+    return matrix;
 }
 
 void
@@ -31,18 +49,40 @@ print_vector(struct Vector vec)
 }
 
 void
+print_matrix(struct Matrix matrix)
+{
+    for(size_t i = 0; i < matrix.rows; i++)
+    {
+        for(size_t j = 0; j < matrix.cols; j++)
+        {
+            printf("%f\t", matrix.elements[i][j]);
+        }
+        printf("\n");
+    }
+
+}
+
+void
 free_vector(struct Vector *vec)
 {
     free(vec->elements);
     vec->length = 0;
 }
 
-// TODO: Implement create_matrix.
+void
+free_matrix(struct Matrix *matrix)
+{
+    free(matrix->elements);
+    matrix->rows = 0;
+    matrix->cols = 0;
+}
 
 int
 main(void)
 {
+    struct Matrix test_matrix = create_matrix(5,5);
 
+    print_matrix(test_matrix);
 
     return 0;
 }

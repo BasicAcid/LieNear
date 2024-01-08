@@ -46,7 +46,6 @@ create_matrix(size_t n_rows, size_t n_cols)
 struct Matrix
 add_matrix(struct Matrix mat_1, struct Matrix mat_2)
 {
-
     // TODO
     // Add size verification.
     // Create binary external function that does this.
@@ -63,11 +62,20 @@ add_matrix(struct Matrix mat_1, struct Matrix mat_2)
     return matrix;
 }
 
-// TODO
-/* struct Matrix */
-/* Hadamard_product(struct Matrix mat_1, struct Matrix mat_2) */
-/* { */
-/* } */
+struct Matrix
+hadamard_product(struct Matrix mat_1, struct Matrix mat_2)
+{
+    struct Matrix matrix = create_matrix(mat_1.rows, mat_1.cols);
+
+    for(size_t i = 0; i < mat_1.rows; i++)
+    {
+        for(size_t j = 0; j < mat_1.cols; j++)
+        {
+            matrix.elements[i][j] = mat_1.elements[i][j] * mat_2.elements[i][j];
+        }
+    }
+    return matrix;
+}
 
 void
 print_vector(struct Vector vec)

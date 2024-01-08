@@ -17,7 +17,8 @@ struct Matrix
     size_t cols;
 };
 
-struct Vector create_vector(size_t length)
+struct Vector
+create_vector(size_t length)
 {
     struct Vector vec;
     vec.elements = malloc(length * sizeof(vec));
@@ -25,7 +26,8 @@ struct Vector create_vector(size_t length)
     return vec;
 }
 
-struct Matrix create_matrix(size_t n_rows, size_t n_cols)
+struct Matrix
+create_matrix(size_t n_rows, size_t n_cols)
 {
     struct Matrix matrix;
     matrix.elements = malloc(n_rows * sizeof(matrix));
@@ -40,6 +42,32 @@ struct Matrix create_matrix(size_t n_rows, size_t n_cols)
 
     return matrix;
 }
+
+struct Matrix
+add_matrix(struct Matrix mat_1, struct Matrix mat_2)
+{
+
+    // TODO
+    // Add size verification.
+    // Create binary external function that does this.
+
+    struct Matrix matrix = create_matrix(mat_1.rows, mat_1.cols);
+
+    for(size_t i = 0; i < mat_1.rows; i++)
+    {
+        for(size_t j = 0; j < mat_1.cols; j++)
+        {
+            matrix.elements[i][j] = mat_1.elements[i][j] + mat_2.elements[i][j];
+        }
+    }
+    return matrix;
+}
+
+// TODO
+/* struct Matrix */
+/* Hadamard_product(struct Matrix mat_1, struct Matrix mat_2) */
+/* { */
+/* } */
 
 void
 print_vector(struct Vector vec)

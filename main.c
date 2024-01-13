@@ -26,6 +26,21 @@ create_vector(size_t length)
     return vec;
 }
 
+struct Vector
+scalar_vector_mul(double scalar, struct Vector vec)
+{
+    struct Vector result;
+    result.elements = malloc(vec.length * sizeof(struct Vector));
+    result.length = vec.length;
+
+    for(size_t i = 0; i < result.length; i++)
+    {
+        result.elements[i] *= scalar;
+    }
+
+    return result;
+}
+
 struct Matrix
 create_matrix(size_t n_rows, size_t n_cols)
 {
@@ -116,6 +131,9 @@ free_matrix(struct Matrix *matrix)
 int
 main(void)
 {
+    // TODO
+    // Add tests.
+
     struct Matrix test_matrix = create_matrix(5,5);
 
     print_matrix(test_matrix);

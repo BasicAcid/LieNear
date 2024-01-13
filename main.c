@@ -21,7 +21,7 @@ struct Vector
 create_vector(size_t length)
 {
     struct Vector vec;
-    vec.elements = malloc(length * sizeof(vec));
+    vec.elements = malloc(length * sizeof(struct Vector));
     vec.length = length;
     return vec;
 }
@@ -45,11 +45,11 @@ struct Matrix
 create_matrix(size_t n_rows, size_t n_cols)
 {
     struct Matrix matrix;
-    matrix.elements = malloc(n_rows * sizeof(matrix));
+    matrix.elements = malloc(n_rows * sizeof(struct Matrix));
 
     for(size_t i = 0; i < n_rows; ++i)
     {
-        matrix.elements[i] = malloc(n_cols * sizeof(matrix));
+        matrix.elements[i] = malloc(n_cols * sizeof(struct Matrix));
     }
 
     matrix.rows = n_rows;
